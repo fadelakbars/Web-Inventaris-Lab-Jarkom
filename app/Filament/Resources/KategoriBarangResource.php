@@ -19,11 +19,22 @@ class KategoriBarangResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Kategori Barang';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('nama_kategori')
+                    ->label('Nama Kategori')
+                    ->required()
+                    ->maxLength(100),
+
+                Forms\Components\Textarea::make('deskripsi')
+                    ->label('Deskripsi')
+                    ->maxLength(255)
+                    ->rows(3),
             ]);
     }
 
@@ -32,6 +43,15 @@ class KategoriBarangResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('nama_kategori')
+                    ->label('Nama Kategori')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('deskripsi')
+                    ->label('Deskripsi')
+                    ->limit(50)
+                    ->wrap(),
             ])
             ->filters([
                 //
