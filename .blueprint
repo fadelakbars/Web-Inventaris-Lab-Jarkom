@@ -1,0 +1,56 @@
+created:
+    - app/Http/Controllers/KategoriBarangController.php
+    - app/Http/Controllers/BarangController.php
+    - app/Http/Controllers/PeminjamanController.php
+    - app/Http/Controllers/PengembalianController.php
+    - database/factories/KategoriBarangFactory.php
+    - database/factories/BarangFactory.php
+    - database/factories/PeminjamanFactory.php
+    - database/factories/DetailPeminjamanFactory.php
+    - database/factories/PengembalianFactory.php
+    - database/migrations/2025_05_16_145211_create_kategori_barangs_table.php
+    - database/migrations/2025_05_16_145212_create_barangs_table.php
+    - database/migrations/2025_05_16_145213_create_peminjamen_table.php
+    - database/migrations/2025_05_16_145214_create_detail_peminjamen_table.php
+    - database/migrations/2025_05_16_145215_create_pengembalians_table.php
+    - app/Models/KategoriBarang.php
+    - app/Models/Barang.php
+    - app/Models/Peminjaman.php
+    - app/Models/DetailPeminjaman.php
+    - app/Models/Pengembalian.php
+    - tests/Feature/Http/Controllers/KategoriBarangControllerTest.php
+    - tests/Feature/Http/Controllers/BarangControllerTest.php
+    - tests/Feature/Http/Controllers/PeminjamanControllerTest.php
+    - tests/Feature/Http/Controllers/PengembalianControllerTest.php
+    - app/Http/Requests/KategoriBarangStoreRequest.php
+    - app/Http/Requests/KategoriBarangUpdateRequest.php
+    - app/Http/Requests/BarangStoreRequest.php
+    - app/Http/Requests/BarangUpdateRequest.php
+    - app/Http/Requests/PeminjamanStoreRequest.php
+    - app/Http/Requests/PeminjamanUpdateRequest.php
+    - app/Http/Requests/PengembalianStoreRequest.php
+    - app/Http/Requests/PengembalianUpdateRequest.php
+    - resources/views/kategoriBarang/index.blade.php
+    - resources/views/kategoriBarang/create.blade.php
+    - resources/views/kategoriBarang/show.blade.php
+    - resources/views/kategoriBarang/edit.blade.php
+    - resources/views/barang/index.blade.php
+    - resources/views/barang/create.blade.php
+    - resources/views/barang/show.blade.php
+    - resources/views/barang/edit.blade.php
+    - resources/views/peminjaman/index.blade.php
+    - resources/views/peminjaman/create.blade.php
+    - resources/views/peminjaman/show.blade.php
+    - resources/views/peminjaman/edit.blade.php
+    - resources/views/pengembalian/index.blade.php
+    - resources/views/pengembalian/create.blade.php
+    - resources/views/pengembalian/show.blade.php
+    - resources/views/pengembalian/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    KategoriBarang: { nama_kategori: 'string:100', deskripsi: 'nullable string:255', timestamps: timestamps }
+    Barang: { nama_barang: 'string:150', kode_barang: 'string:100 unique', kategori_id: 'id foreign:KategoriBarang', jumlah: integer, satuan: 'string:50', kondisi: 'enum:baik,rusak,hilang', lokasi: 'string:100', timestamps: timestamps }
+    Peminjaman: { user_id: 'id foreign:User', tanggal_pinjam: date, tanggal_kembali: date, status: 'enum:dipinjam,dikembalikan,terlambat', keterangan: 'nullable text', timestamps: timestamps }
+    DetailPeminjaman: { peminjaman_id: 'id foreign:Peminjaman', barang_id: 'id foreign:Barang', jumlah_pinjam: integer, timestamps: timestamps }
+    Pengembalian: { peminjaman_id: 'id foreign:Peminjaman', tanggal_pengembalian: date, kondisi_barang: 'enum:baik,rusak,hilang', catatan: 'nullable text', timestamps: timestamps }

@@ -1,0 +1,50 @@
+models:
+  KategoriBarang:
+    nama_kategori: string:100
+    deskripsi: nullable string:255
+    timestamps: true
+
+  Barang:
+    nama_barang: string:150
+    kode_barang: string:100 unique
+    kategori_id: id foreign:KategoriBarang
+    jumlah: integer
+    satuan: string:50
+    kondisi: enum:baik,rusak,hilang
+    lokasi: string:100
+    timestamps: true
+
+  Peminjaman:
+    user_id: id foreign:User
+    tanggal_pinjam: date
+    tanggal_kembali: date
+    status: enum:dipinjam,dikembalikan,terlambat
+    keterangan: nullable text
+    timestamps: true
+
+  DetailPeminjaman:
+    peminjaman_id: id foreign:Peminjaman
+    barang_id: id foreign:Barang
+    jumlah_pinjam: integer
+    timestamps: true
+
+  Pengembalian:
+    peminjaman_id: id foreign:Peminjaman
+    tanggal_pengembalian: date
+    kondisi_barang: enum:baik,rusak,hilang
+    catatan: nullable text
+    timestamps: true
+
+controllers:
+
+  KategoriBarang:
+    resource
+
+  Barang:
+    resource
+
+  Peminjaman:
+    resource
+
+  Pengembalian:
+    resource
